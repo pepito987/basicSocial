@@ -14,7 +14,7 @@ public class SocialTest {
         String cmd = "alice -> Hello World!";
         Social test = new Social();
         test.execRequest(cmd);
-        assertTrue(Social.messages.contains("Hello World"));
+        assertTrue("actual: "+Social.messages,Social.messages.contains("Hello World!"));
     }
 
 
