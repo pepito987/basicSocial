@@ -76,5 +76,28 @@ public class SocialTest {
 		assertEquals("Actual: "+tmp.size(), 2, tmp.size() );
 		
 	}
+	
+	@Test
+	public void execRequestShouldReturnTheUserWallIfTheCommandIsWallEndThereAreMoreThenOneSubscriber(){
+		String bob_post = "bob -> first message from bob";
+		String alice_post = "alice -> today is Friday :D";
+		String charlie_post = "charlie -> Hi I am charlie";
+		String charlie_follow = "charlie follow bob";
+		String alice_follow = "alice follow bob";
+		String charlie_wall = "charlie wall";
+		String alice_wall = "alice wall";
+		Social test = new Social();
+		test.execRequest(bob_post);
+		test.execRequest(alice_post);
+		test.execRequest(charlie_post);
+		test.execRequest(charlie_follow);
+		test.execRequest(alice_follow);
+		List<String> charlie_wall_list = test.execRequest(charlie_follow);
+		List<String> alice_wall_list = test.execRequest(alice_wall);
+		
+		assertEquals("Actual: "+charlie_wall_list.size(), 2, charlie_wall_list.size() );
+		assertEquals("Actual: "+alice_wall_list.size(), 2, alice_wall_list.size() );
+		
+	}
 
 }
