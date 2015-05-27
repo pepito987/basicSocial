@@ -92,13 +92,13 @@ public class SocialTest {
 		test.execRequest(charlie_post);
 		test.execRequest(charlie_follow);
 		test.execRequest(alice_follow);
-		List<String> charlie_wall_list = test.execRequest(charlie_follow);
+		List<String> charlie_wall_list = test.execRequest(charlie_wall);
 		List<String> alice_wall_list = test.execRequest(alice_wall);
 		
 		assertEquals("Actual: "+charlie_wall_list.size(), 2, charlie_wall_list.size() );
-		assertTrue(charlie_wall_list.contains("first message from bob"));
+		assertTrue("Actual: "+charlie_wall_list, charlie_wall_list.contains("first message from bob"));
 		assertEquals("Actual: "+alice_wall_list.size(), 2, alice_wall_list.size() );
-		assertTrue(alice_wall_list.contains("first message from bob"));
+		assertTrue("Actual: "+alice_wall_list,alice_wall_list.contains("first message from bob"));
 		
 	}
 

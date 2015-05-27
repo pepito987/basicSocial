@@ -15,31 +15,31 @@ public class Social {
 
 	public List<String> execRequest(String cmd) {
 		String[] cmd_line = cmd.split("\\s{1}",3);
-	
+		String usr = cmd_line[0].trim();
 		if(cmd_line.length >1 ){
 			switch (cmd_line[1]) {
 			case "follow":{
-				if( this.followers.get(cmd_line[0]) == null){
-					this.followers.put(cmd_line[0], new ArrayList<String>());
+				if( this.followers.get(usr) == null){
+					this.followers.put(usr, new ArrayList<String>());
 				}
-				this.followers.get(cmd_line[0]).add(cmd_line[2]);
-				return followers.get(cmd_line[0]);
+				this.followers.get(usr).add(cmd_line[2].trim());
+				return followers.get(usr);
 			} 
 			case "wall":{
-				List<String> wall = this.messages.get(cmd_line[0]);
-				List<String> follow = this.followers.get(cmd_line[0]);
+				List<String> wall = this.messages.get(usr);
+				List<String> follow = this.followers.get(usr);
 				for (String user : follow) {
 					wall.addAll(messages.get(user));
 				}
 				return wall;
 			} 
 			case "->":{
-				if( this.messages.get(cmd_line[0]) != null)
-					this.messages.get(cmd_line[0]).add(cmd_line[1]);
+				if( this.messages.get(usr) != null)
+					this.messages.get(usr).add(cmd_line[2].trim());
 				else{
-					this.messages.put(cmd_line[0].trim(), new ArrayList<String>(Arrays.asList(cmd_line[2])));
+					this.messages.put(usr.trim(), new ArrayList<String>(Arrays.asList(cmd_line[2].trim())));
 				}
-				return this.messages.get(cmd_line[0]);
+				return this.messages.get(usr);
 			} 
 			default:
 				return null;
@@ -47,7 +47,7 @@ public class Social {
 			}
 		}
 		
-		return this.messages.get(cmd_line[0]);
+		return this.messages.get(usr);
 		
 	}
 
