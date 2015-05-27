@@ -17,7 +17,13 @@ public class Social {
 		if(cmd_line.length >1 ){
 			if( cmd_line[1].equals("follow")){
 				this.followers.add(cmd_line[2]);
-			}
+			}else if( cmd_line[1].equals("wall")){
+				List<String> wall = this.messages.get(cmd_line[0]);
+				for (String user : followers) {
+					wall.addAll(messages.get(user));
+				}
+				return wall;
+			}else 
 			if( this.messages.get(cmd_line[0]) != null)
 				this.messages.get(cmd_line[0]).add(cmd_line[1]);
 			else{
