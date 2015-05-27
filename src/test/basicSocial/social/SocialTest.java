@@ -21,7 +21,7 @@ public class SocialTest {
 		Social test = new Social();
 		test.execRequest(post);
 		test.execRequest(post2);
-		assertTrue("Actual: "+test.messagesList.size(),test.messagesList.size() == 1);
+		assertTrue("Actual: "+test.messagesList.size(),test.messagesList.size() == 2);
 	}
 
 }
