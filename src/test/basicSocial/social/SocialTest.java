@@ -73,7 +73,6 @@ public class SocialTest {
 		test.execRequest(charlie_post);
 		test.execRequest(follow);
 		List<String> tmp = test.execRequest(wall);
-		System.out.println(tmp);
 		assertEquals("Actual: "+tmp.size(), 2, tmp.size() );
 		
 	}
