@@ -49,7 +49,7 @@ public class SocialTest {
 		assertEquals("Actual: "+tmp.size(),1,tmp.size());
 		assertEquals("Hello World!", tmp.get(0));
 		tmp = test.execRequest(read_bob);
-		assertEquals("Actual: "+tmp.size(),0,tmp.size());
+		assertEquals("Actual: "+tmp.size(),1,tmp.size());
 		assertEquals("first message from bob", tmp.get(0));
 	}
 
