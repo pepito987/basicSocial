@@ -35,5 +35,17 @@ public class SocialTest {
 		List<String> tmp = test.execRequest(read);
 		assertEquals("Actual: "+tmp.size(),1,tmp.size());
 	}
+	
+	@Test
+	public void execRequestShouldReturnAllTheMessageForTheSpecificUserIfTheCommandIsRead(){
+		String alice_post = "alice -> Hello World!";
+		String bob_post = "bob -> first message from bob";
+		String read_alice = "alice";
+		Social test = new Social();
+		test.execRequest(alice_post);
+		test.execRequest(bob_post);
+		List<String> tmp = test.execRequest(read_alice);
+		assertEquals("Actual: "+tmp.size(),1,tmp.size());
+	}
 
 }
