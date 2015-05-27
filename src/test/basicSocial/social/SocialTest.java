@@ -41,12 +41,16 @@ public class SocialTest {
 		String alice_post = "alice -> Hello World!";
 		String bob_post = "bob -> first message from bob";
 		String read_alice = "alice";
+		String read_bob = "bob";
 		Social test = new Social();
 		test.execRequest(alice_post);
 		test.execRequest(bob_post);
 		List<String> tmp = test.execRequest(read_alice);
 		assertEquals("Actual: "+tmp.size(),1,tmp.size());
 		assertEquals("Hello World!", tmp.get(0));
+		tmp = test.execRequest(read_bob);
+		assertEquals("Actual: "+tmp.size(),0,tmp.size());
+		assertEquals("first message from bob", tmp.get(0));
 	}
 
 }
