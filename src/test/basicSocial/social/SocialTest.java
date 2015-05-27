@@ -12,8 +12,8 @@ public class SocialTest {
 	public void execRequestShouldAdd1MessageToTheMessageListIfTheUserPostOneMessage(){
 		String post = "alice -> Hello World!";
 		Social test = new Social();
-		test.execRequest(post);
-		assertTrue("Actual: "+test.messagesList.size(),test.messagesList.size() == 1);
+		List<String> tmp = test.execRequest(post);
+		assertTrue("Actual: "+tmp.size(),tmp.size() == 1);
 	}
 	
 	@Test
@@ -22,8 +22,8 @@ public class SocialTest {
 		String post2 = "alice -> second message";
 		Social test = new Social();
 		test.execRequest(post);
-		test.execRequest(post2);
-		assertTrue("Actual: "+test.messagesList.size(),test.messagesList.size() == 2);
+		List<String> tmp = test.execRequest(post2);
+		assertTrue("Actual: "+tmp.size(),tmp.size() == 2);
 	}
 	
 	@Test
@@ -46,6 +46,7 @@ public class SocialTest {
 		test.execRequest(bob_post);
 		List<String> tmp = test.execRequest(read_alice);
 		assertEquals("Actual: "+tmp.size(),1,tmp.size());
+		assertEquals("Hello World!", tmp.get(0));
 	}
 
 }
