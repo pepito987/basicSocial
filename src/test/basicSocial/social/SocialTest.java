@@ -99,7 +99,6 @@ public class SocialTest {
 		assertTrue("Actual: "+charlie_wall_list, charlie_wall_list.contains("first message from bob"));
 		assertEquals("Actual: "+alice_wall_list.size(), 2, alice_wall_list.size() );
 		assertTrue("Actual: "+alice_wall_list,alice_wall_list.contains("first message from bob"));
-		
 	}
 
 }
