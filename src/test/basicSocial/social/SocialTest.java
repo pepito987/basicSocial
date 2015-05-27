@@ -61,5 +61,21 @@ public class SocialTest {
 		test.execRequest(cmd);
 		assertEquals("Actual: "+test.followers.size(),1,test.followers.size());
 	}
+	
+	@Test
+	public void execRequestShouldReturnTheUserWallWithIfTheCommandIsWallAndThereIsOnlyOneSubscriber(){
+		String bob_post = "bob -> first message from bob";
+		String charlie_post = "charlie -> Hi I am charlie";
+		String follow = "charlie follow bob";
+		String wall = "charlie wall";
+		Social test = new Social();
+		test.execRequest(bob_post);
+		test.execRequest(charlie_post);
+		test.execRequest(follow);
+		List<String> tmp = test.execRequest(wall);
+		System.out.println(tmp);
+		assertEquals("Actual: "+tmp.size(), 2, tmp.size() );
+		
+	}
 
 }
