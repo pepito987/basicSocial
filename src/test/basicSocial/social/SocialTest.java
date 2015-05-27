@@ -96,7 +96,9 @@ public class SocialTest {
 		List<String> alice_wall_list = test.execRequest(alice_wall);
 		
 		assertEquals("Actual: "+charlie_wall_list.size(), 2, charlie_wall_list.size() );
+		assertTrue(charlie_wall_list.contains("first message from bob"));
 		assertEquals("Actual: "+alice_wall_list.size(), 2, alice_wall_list.size() );
+		assertTrue(alice_wall_list.contains("first message from bob"));
 		
 	}
 
