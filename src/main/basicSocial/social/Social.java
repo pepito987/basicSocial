@@ -9,9 +9,10 @@ public class Social {
 
 	public List<String> execRequest(String cmd) {
 		String[] cmd_line = cmd.split("->");
-		this.messagesList.add(cmd_line[1]);
+		if(cmd_line.length >1)
+			this.messagesList.add(cmd_line[1]);
 		
-		return null;
+		return this.messagesList;
 	}
 
 }
