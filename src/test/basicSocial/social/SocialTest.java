@@ -2,6 +2,7 @@ package basicSocial.social;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -51,6 +52,14 @@ public class SocialTest {
 		tmp = test.execRequest(read_bob);
 		assertEquals("Actual: "+tmp.size(),1,tmp.size());
 		assertEquals("first message from bob", tmp.get(0));
+	}
+	
+	@Test
+	public void execRequestShouldAddTheUserToTheFollowListIfTheCommandIsFollow(){
+		String cmd = "charlie follow bob";
+		Social test = new Social();
+		test.execRequest(cmd);
+		assertEquals("Actual: "+test.followers.size(),1,test.followers.size());
 	}
 
 }

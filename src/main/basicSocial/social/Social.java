@@ -10,6 +10,7 @@ import java.util.Map;
 public class Social {
 	
 	public Map<String,List<String>> messages = new HashMap<String, List<String>>();
+	public List<String> followers = new ArrayList<String>();
 
 	public List<String> execRequest(String cmd) {
 		String[] cmd_line = cmd.split(" -> ");
