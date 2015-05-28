@@ -22,7 +22,11 @@ public class Wall {
     }
 
     public List<String> getPostsList(){
-       return null;
+        List<String> postsList = new ArrayList<>();
+        for( Message msg : this.posts){
+            postsList.add(msg.getText());
+        }
+        return postsList;
     }
 
     public void setPosts(List<Message> posts) {
