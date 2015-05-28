@@ -2,6 +2,7 @@ package social;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -58,8 +59,9 @@ public class SocialTest {
 	public void execRequestShouldAddTheUserToTheFollowListIfTheCommandIsFollow(){
 		String cmd = "charlie follow bob";
 		Social test = new Social();
-		test.execRequest(cmd);
-		assertEquals("Actual: "+test.followers.size(),1,test.followers.size());
+		List<String> followers = test.execRequest(cmd);
+
+		assertEquals("Actual: "+followers, Arrays.asList("bobb"),followers);
 	}
 	
 	@Test
