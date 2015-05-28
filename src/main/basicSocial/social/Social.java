@@ -32,11 +32,7 @@ public class Social {
                     this.walls.put(usr,new Wall(usr));
                 }
                 this.walls.get(usr).getPosts().add(new Message(cmd_line[2].trim()));
-                List<String> posts = new ArrayList<>();
-                for( Message msg : this.walls.get(usr).getPosts()){
-                    posts.add(msg.getText());
-                }
-                return posts;
+                return this.walls.get(usr).getPostsList();
             } else {
                 return null;
             }
