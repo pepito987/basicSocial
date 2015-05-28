@@ -11,8 +11,6 @@ public class Wall {
     private List<String> followers;
     private List<Message> posts;
 
-
-
     public Wall(String userName) {
         this.followers = new ArrayList<>();
         this.posts = new ArrayList<>();
@@ -21,6 +19,10 @@ public class Wall {
 
     public List<Message> getPosts() {
         return posts;
+    }
+
+    public List<String> getPostsList(){
+       return null;
     }
 
     public void setPosts(List<Message> posts) {
