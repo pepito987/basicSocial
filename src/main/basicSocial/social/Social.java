@@ -6,10 +6,6 @@ import model.Wall;
 import java.util.*;
 
 public class Social {
-	
-	public Map<String,List<String>> messages = new HashMap<String, List<String>>();
-	public Map<String,List<String>> followers = new HashMap<String, List<String>>();
-
 
     private Map<String, Wall> walls = new HashMap<>();
 
@@ -21,29 +17,34 @@ public class Social {
             if (cmd_line[1].equals("follow")) {
                 return addFollower(usr,cmd_line[2]);
             } else if (cmd_line[1].equals("wall")) {
-                List<String> wall = this.messages.get(usr);
-                List<String> follow = this.followers.get(usr);
+                Wall user_wall = this.walls.get(usr);
+                List<String> follow = user_wall.getFollowers();
+                List<String> posts = user_wall.getPostsList();
                 for (String user : follow) {
-                    wall.addAll(messages.get(user));
+                    posts.addAll(this.walls.get(user).getPostsList());
                 }
-                return wall;
+                return posts;
             } else if (cmd_line[1].equals("->")) {
-                if( this.walls.get(usr) == null ){
-                    this.walls.put(usr,new Wall(usr));
-                }
+                checkUser(usr);
                 this.walls.get(usr).getPosts().add(new Message(cmd_line[2].trim()));
                 return this.walls.get(usr).getPostsList();
             } else {
                 return null;
             }
 		}
-		
-		return this.messages.get(usr);
+		return this.walls.get(usr).getPostsList();
 		
 	}
 
+    private void checkUser(String userName){
+        if( this.walls.get(userName) == null ){
+            this.walls.put(userName,new Wall(userName));
+        }
+    }
+
 
     private List<String> addFollower(String user, String follower){
+        checkUser(user);
         List<String> followers = this.walls.get(user).getFollowers();
         if( ! followers.contains(follower) ){
             followers.add(follower);
