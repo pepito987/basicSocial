@@ -11,9 +11,12 @@ public class Wall {
     private List<String> followers;
     private List<Message> posts;
 
-    public Wall() {
+
+
+    public Wall(String userName) {
         this.followers = new ArrayList<>();
         this.posts = new ArrayList<>();
+        this.userName = userName;
     }
 
     public List<Message> getPosts() {

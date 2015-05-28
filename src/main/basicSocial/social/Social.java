@@ -1,5 +1,6 @@
 package social;
 
+import model.Message;
 import model.Wall;
 
 import java.util.*;
@@ -27,12 +28,15 @@ public class Social {
                 }
                 return wall;
             } else if (cmd_line[1].equals("->")) {
-                if (this.messages.get(usr) != null)
-                    this.messages.get(usr).add(cmd_line[2].trim());
-                else {
-                    this.messages.put(usr.trim(), new ArrayList<String>(Arrays.asList(cmd_line[2].trim())));
+                if( this.walls.get(usr) == null ){
+                    this.walls.put(usr,new Wall(usr));
                 }
-                return this.messages.get(usr);
+                this.walls.get(usr).getPosts().add(new Message(cmd_line[2].trim()));
+                List<String> posts = new ArrayList<>();
+                for( Message msg : this.walls.get(usr).getPosts()){
+                    posts.add(msg.getText());
+                }
+                return posts;
             } else {
                 return null;
             }
@@ -44,8 +48,6 @@ public class Social {
 
 
     private List<String> addFollower(String user, String follower){
-        if( this.walls.get(user) == null )
-            this.walls.put(user,new Wall());
         List<String> followers = this.walls.get(user).getFollowers();
         if( ! followers.contains(follower) ){
             followers.add(follower);

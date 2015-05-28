@@ -15,7 +15,7 @@ public class SocialTest {
 		String post = "alice -> Hello World!";
 		Social test = new Social();
 		List<String> tmp = test.execRequest(post);
-		assertTrue("Actual: "+tmp.size(),tmp.size() == 2);
+		assertTrue("Actual: "+tmp.size(),tmp.size() == 1);
 	}
 	
 	@Test

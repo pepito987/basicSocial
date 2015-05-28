@@ -10,6 +10,10 @@ public class Message {
     private String text;
     private LocalDateTime time;
 
+    public Message(String text) {
+        this.text = text;
+    }
+
     public String getText() {
         return text;
     }
