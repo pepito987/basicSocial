@@ -61,7 +61,7 @@ public class SocialTest {
 		Social test = new Social();
 		List<String> followers = test.execRequest(cmd);
 
-		assertEquals("Actual: "+followers, Arrays.asList("bobb"),followers);
+		assertEquals("Actual: "+followers, Arrays.asList("bob"),followers);
 	}
 	
 	@Test
