@@ -1,7 +1,5 @@
-package social;
+package model;
 
-import model.Message;
-import model.Wall;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -21,5 +19,6 @@ public class WallTest {
         wall.getPosts().add(new Message(msg1));
         wall.getPosts().add(new Message(msg2));
         assertEquals(Arrays.asList(msg1,msg2),wall.getPostsList());
+
     }
 }

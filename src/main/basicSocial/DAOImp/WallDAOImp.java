@@ -7,6 +7,8 @@ import model.Wall;
  */
 public class WallDAOImp implements WallDAO {
 
+    public static String COLLECTION = "SocialWall";
+
     @Override
     public void saveWall(Wall wall) {
 
