@@ -1,6 +1,6 @@
 package utils;
 
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertNotNull;
@@ -12,9 +12,9 @@ public class MongoUtilsTest {
 
     @Test
     public void getMongoShouldReturnAMongoClient(){
-        MongoClient db = MongoUtils.getMongoDB();
+        MongoDatabase db = MongoUtils.getMongoDB();
         assertNotNull(db);
-        db.close();
+        MongoUtils.closeMongo();
     }
 
 }
