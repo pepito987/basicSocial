@@ -1,9 +1,10 @@
-package social;
+package basicSocial.social;
 
-import model.Message;
-import model.Wall;
 
 import java.util.*;
+
+import basicSocial.model.Message;
+import basicSocial.model.Wall;
 
 public class Social {
 

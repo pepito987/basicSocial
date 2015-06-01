@@ -1,4 +1,4 @@
-package utils;
+package basicSocial.utils;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;

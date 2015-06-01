@@ -1,6 +1,7 @@
-package model;
+package basicSocial.model;
 
-import java.time.LocalDateTime;
+import org.joda.time.LocalDateTime;
+
 
 /**
  * Created by peppe on 28/05/15.

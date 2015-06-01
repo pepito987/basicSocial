@@ -1,4 +1,4 @@
-package utils;
+package basicSocial.utils;
 
 import com.mongodb.client.MongoDatabase;
 import org.junit.Test;

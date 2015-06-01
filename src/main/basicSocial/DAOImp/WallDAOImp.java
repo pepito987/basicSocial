@@ -1,19 +1,23 @@
-package DAOImp;
+package basicSocial.DAOImp;
+
+import org.bson.Document;
+
+import basicSocial.model.Wall;
+import basicSocial.model.WallTest;
+import basicSocial.utils.MongoUtils;
 
 import com.mongodb.client.MongoDatabase;
-import model.Wall;
-import org.bson.Document;
-import utils.MongoUtils;
+
 
 /**
  * Created by peppe on 28/05/15.
  */
-public class WallDAOImp implements WallDAO {
+public class WallDAOImp implements BasicSocialDAO {
 
     public static String COLLECTION = "SocialWall";
 
     @Override
-    public void saveWall(Wall wall) {
+    public void saveMessage(Wall wall) {
         Document doc = new Document();
         doc.append("userName",wall.getUserName());
         doc.append("posts",wall.getPosts());

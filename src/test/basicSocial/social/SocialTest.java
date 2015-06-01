@@ -1,4 +1,4 @@
-package social;
+package basicSocial.social;
 
 import org.junit.Test;
 
