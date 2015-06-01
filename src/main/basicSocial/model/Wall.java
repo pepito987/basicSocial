@@ -48,4 +48,26 @@ public class Wall {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Wall wall = (Wall) o;
+
+        if (!followers.equals(wall.followers)) return false;
+        if (!posts.equals(wall.posts)) return false;
+        if (!userName.equals(wall.userName)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = userName.hashCode();
+        result = 31 * result + followers.hashCode();
+        result = 31 * result + posts.hashCode();
+        return result;
+    }
 }

@@ -7,7 +7,7 @@ import org.junit.Test;
 import utils.MongoUtils;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by peppe on 29/05/15.
@@ -23,9 +23,22 @@ public class WallDAOImpTest {
         Document doc = db.getCollection(WallDAOImp.COLLECTION).find(new Document("userName","Alice")).first();
         assertNotNull(doc);
         assertEquals("Alice",doc.getString("userName"));
+        System.out.println(doc.toJson());
         MongoUtils.closeMongo();
 
     }
 
+//    @Test
+    public void getWallShouldReturnTheWallForTheSpecificUser(){
+        Wall wall = new Wall("Alice");
+
+        MongoDatabase db = MongoUtils.getMongoDB();
+        Document doc = new Document();
+        doc.append("userName",wall.getUserName());
+        db.getCollection(WallDAOImp.COLLECTION).insertOne(doc);
+
+        WallDAOImp wallImp = new WallDAOImp();
+        assertEquals(wall,wallImp.getWall("Alice"));
+    }
 
 }
