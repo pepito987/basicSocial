@@ -2,15 +2,23 @@ package basicSocial.DAOImp;
 
 import java.util.List;
 
+import org.bson.Document;
+
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.IndexOptions;
+
 import basicSocial.model.Message;
 import basicSocial.model.User;
+import basicSocial.utils.MongoUtils;
 
 public class BasicSocialDAOImp implements BasicSocialDAO {
 
 	@Override
 	public void createUser(User user) {
-		// TODO Auto-generated method stub
-		
+		Document doc = new Document("name", user.getName())
+		.append("followers", user.getFollowers());
+		MongoDatabase db = MongoUtils.getMongoDB();
+		db.getCollection(User.COLLECTION).insertOne(doc);
 	}
 
 	@Override
