@@ -67,5 +67,18 @@ public class BasicSocialDAOImpTest{
 		MongoCollection<Document> collection = db.getCollection(User.COLLECTION);
 		assertEquals(1, collection.count(eq("name","Charlie")));
 	}
+	
+	@Test
+	public void getUserShoudlReturnTheUserIfItExistOnTheDB(){
+		User user = new User();
+		user.setName("Charlie");
+		user.addFollower("Bob");
+		user.addFollower("Alice");
+		Document doc = new Document("name", user.getName()).append("followers", user.getFollowers());
+		db.getCollection(User.COLLECTION).insertOne(doc);
+		
+		BasicSocialDAOImp daoImp = new BasicSocialDAOImp();
+		assertEquals(user,daoImp.getUser(user.getName()));
+	}
 
 }

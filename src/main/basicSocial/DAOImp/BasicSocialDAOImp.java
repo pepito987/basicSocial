@@ -4,6 +4,8 @@ import static com.mongodb.client.model.Filters.eq;
 
 import java.util.List;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.RestoreAction;
+
 import org.bson.Document;
 
 import com.mongodb.client.MongoCollection;
@@ -37,8 +39,14 @@ public class BasicSocialDAOImp implements BasicSocialDAO {
 
 	@Override
 	public User getUser(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		User result = null;
+		Document find = db.getCollection(User.COLLECTION).find(eq("name",name)).first();
+		if(find != null){
+			result = new User();
+			result.setName(find.getString("name"));
+			result.setFollowers(find.get("followers", List.class));
+		}
+		return result;
 	}
 
 	@Override
