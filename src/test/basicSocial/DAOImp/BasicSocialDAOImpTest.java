@@ -1,8 +1,11 @@
 package basicSocial.DAOImp;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.bson.Document;
+import org.joda.time.LocalDateTime;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -86,5 +89,32 @@ public class BasicSocialDAOImpTest{
 		BasicSocialDAOImp daoImp = new BasicSocialDAOImp();
 		assertNull(daoImp.getUser("Alice"));
 	}
+	
+	@Test
+	public void savePostShouldSaveAPostInTheDB(){
+		Message post = new Message("Alice", "Hello World");
+		BasicSocialDAOImp daoImp = new BasicSocialDAOImp();
+		daoImp.savePost(post);
+		Document pst = db.getCollection(Message.COLLECTION).find(new Document("sender",post.getSender()).append("time",post.getTime().toDate())).first();
+		assertEquals(post.getSender(), pst.getString("sender"));
+		assertEquals(post.getText(), pst.getString("text"));
+		assertEquals(post.getTime().toDate(), pst.get("time",Date.class));
+	}
+	
+	@Test
+	public void getAllPostShouldReturnAllTheUserssPosts(){
+		List<Message> msgList = new ArrayList<Message>();
+		msgList.add(new Message("Alice", "Hello World!"));
+		msgList.add(new Message("Alice", "today is Friday!!"));
+		
+		for (Message message : msgList) {
+			db.getCollection(Message.COLLECTION).insertOne(new Document("sender",message.getSender()).append("text", message.getText()).append("time",message.getTime().toDate()));
+		}
+				
+		BasicSocialDAOImp daoImp = new BasicSocialDAOImp();
+		
+		assertEquals(msgList, daoImp.getAllPosts("Alice"));	
+	}
+
 
 }

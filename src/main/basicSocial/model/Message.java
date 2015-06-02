@@ -8,12 +8,15 @@ import org.joda.time.LocalDateTime;
  */
 public class Message {
 	
+	public static final String COLLECTION = "post";
+	
 	private String sender;
     private String text;
     private LocalDateTime time;
 
     public Message(String sender,String text) {
         this.text = text;
+        this.sender = sender;
         this.time = LocalDateTime.now();
     }
 
@@ -33,7 +36,15 @@ public class Message {
         this.time = time;
     }
 
-    @Override
+    public String getSender() {
+		return sender;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

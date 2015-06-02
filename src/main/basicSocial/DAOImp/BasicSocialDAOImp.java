@@ -2,13 +2,20 @@ package basicSocial.DAOImp;
 
 import static com.mongodb.client.model.Filters.eq;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.print.Doc;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.RestoreAction;
 
 import org.bson.Document;
+import org.joda.time.LocalDateTime;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.IndexOptions;
 
@@ -33,8 +40,8 @@ public class BasicSocialDAOImp implements BasicSocialDAO {
 
 	@Override
 	public void savePost(Message post) {
-		// TODO Auto-generated method stub
-		
+		Document pst = new Document("sender",post.getSender()).append("text", post.getText()).append("time", post.getTime().toDate());
+		db.getCollection(Message.COLLECTION).insertOne(pst);
 	}
 
 	@Override
@@ -51,8 +58,16 @@ public class BasicSocialDAOImp implements BasicSocialDAO {
 
 	@Override
 	public List<Message> getAllPosts(String userName) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Message> postsList = new ArrayList<Message>();
+		FindIterable<Document> results = db.getCollection(Message.COLLECTION).find();
+		MongoCursor<Document> cursor = results.iterator();
+		while(cursor.hasNext()){
+			Document tempDoc = cursor.next();
+			Message post = new Message(tempDoc.getString("sender"), tempDoc.getString("text"));
+			post.setTime(new LocalDateTime(tempDoc.get("time",Date.class).getTime())); 
+			postsList.add(post);
+		}
+		return postsList;
 	}
 
 }
