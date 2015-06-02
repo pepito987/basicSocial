@@ -117,6 +117,28 @@ public class BasicSocialDAOImpTest{
 		
 		assertEquals(msgList, daoImp.getAllPosts(alice));	
 	}
+	
+	
+	@Test
+	public void getAllPostShouldReturnAllTheUserPostAlongWithAllTheFollowersPost(){
+		User user = new User("Charlie");
+		user.addFollower("Bob");
+		user.addFollower("Alice");
+		List<Message> msgList = new ArrayList<Message>();
+		msgList.add(new Message("Charlie", "Hello World!"));
+		msgList.add(new Message("Bob", "today is Friday!!"));
+		msgList.add(new Message("Alice", "Hi, this is Alice!"));
+		
+		for (Message message : msgList) {
+			db.getCollection(Message.COLLECTION).insertOne(new Document("sender",message.getSender()).append("text", message.getText()).append("time",message.getTime().toDate()));
+		}
+		
+		BasicSocialDAOImp daoImp = new BasicSocialDAOImp();
+		List<Message> result = daoImp.getAllPosts(user);
+		System.out.println(result.size());
+		assertEquals(msgList, result);	
+	}
+	
 
 
 }

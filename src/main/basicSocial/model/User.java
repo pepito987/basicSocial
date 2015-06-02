@@ -14,6 +14,12 @@ public class User {
 	public User() {
 		this.followers = new ArrayList<String>();
 	}
+	
+	public User(String name){
+		this.followers = new ArrayList<String>();
+		this.name = name;
+	}
+	
 	public String getName() {
 		return name;
 	}

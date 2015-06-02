@@ -3,6 +3,7 @@ package basicSocial.DAOImp;
 import static com.mongodb.client.model.Filters.eq;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -59,7 +60,11 @@ public class BasicSocialDAOImp implements BasicSocialDAO {
 	@Override
 	public List<Message> getAllPosts(User user) {
 		List<Message> postsList = new ArrayList<Message>();
-		FindIterable<Document> results = db.getCollection(Message.COLLECTION).find(new Document("sender",user.getName()));
+		System.out.println(user.getFollowers());
+		List<String> constrain = new ArrayList<String>();
+		constrain.add(user.getName());
+		constrain.addAll(user.getFollowers());
+		FindIterable<Document> results = db.getCollection(Message.COLLECTION).find(new Document("sender", new Document("$in", constrain)));
 		MongoCursor<Document> cursor = results.iterator();
 		while(cursor.hasNext()){
 			Document tempDoc = cursor.next();
