@@ -57,9 +57,9 @@ public class BasicSocialDAOImp implements BasicSocialDAO {
 	}
 
 	@Override
-	public List<Message> getAllPosts(String userName) {
+	public List<Message> getAllPosts(User user) {
 		List<Message> postsList = new ArrayList<Message>();
-		FindIterable<Document> results = db.getCollection(Message.COLLECTION).find();
+		FindIterable<Document> results = db.getCollection(Message.COLLECTION).find(new Document("sender",user.getName()));
 		MongoCursor<Document> cursor = results.iterator();
 		while(cursor.hasNext()){
 			Document tempDoc = cursor.next();

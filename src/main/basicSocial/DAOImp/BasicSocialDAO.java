@@ -18,6 +18,6 @@ public interface BasicSocialDAO {
 	
 	public User getUser(String name);
 	
-	public List<Message> getAllPosts(String userName);
+	public List<Message> getAllPosts(User user);
 	
 }

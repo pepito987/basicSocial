@@ -103,9 +103,11 @@ public class BasicSocialDAOImpTest{
 	
 	@Test
 	public void getAllPostShouldReturnAllTheUserssPosts(){
+		User alice = new User();
+		alice.setName("Alice");
 		List<Message> msgList = new ArrayList<Message>();
-		msgList.add(new Message("Alice", "Hello World!"));
-		msgList.add(new Message("Alice", "today is Friday!!"));
+		msgList.add(new Message(alice.getName(), "Hello World!"));
+		msgList.add(new Message(alice.getName(), "today is Friday!!"));
 		
 		for (Message message : msgList) {
 			db.getCollection(Message.COLLECTION).insertOne(new Document("sender",message.getSender()).append("text", message.getText()).append("time",message.getTime().toDate()));
@@ -113,7 +115,7 @@ public class BasicSocialDAOImpTest{
 				
 		BasicSocialDAOImp daoImp = new BasicSocialDAOImp();
 		
-		assertEquals(msgList, daoImp.getAllPosts("Alice"));	
+		assertEquals(msgList, daoImp.getAllPosts(alice));	
 	}
 
 
