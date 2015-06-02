@@ -58,12 +58,12 @@ public class BasicSocialDAOImp implements BasicSocialDAO {
 	}
 
 	@Override
-	public List<Message> getAllPosts(User user) {
+	public List<Message> getAllPosts(User user,Boolean personal) {
 		List<Message> postsList = new ArrayList<Message>();
-		System.out.println(user.getFollowers());
 		List<String> constrain = new ArrayList<String>();
 		constrain.add(user.getName());
-		constrain.addAll(user.getFollowers());
+		if( !personal )
+			constrain.addAll(user.getFollowers());
 		FindIterable<Document> results = db.getCollection(Message.COLLECTION).find(new Document("sender", new Document("$in", constrain)));
 		MongoCursor<Document> cursor = results.iterator();
 		while(cursor.hasNext()){
@@ -75,4 +75,12 @@ public class BasicSocialDAOImp implements BasicSocialDAO {
 		return postsList;
 	}
 
+	@Override
+	public User updateFollowerList(User user) {
+		Document tempUser = db.getCollection(User.COLLECTION).findOneAndUpdate(eq("name",user.getName()),
+				new Document("$set", new Document("followers",user.getFollowers())));
+		return this.getUser(user.getName());
+	}
+
+	
 }

@@ -24,8 +24,8 @@ public class MongoUtils {
                 e.printStackTrace();
             }
             db = mongoClient.getDatabase(DB_NAME);
+            
         }
-        
         return db;
     }
     

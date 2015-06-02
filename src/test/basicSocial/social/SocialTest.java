@@ -1,6 +1,12 @@
 package basicSocial.social;
 
+import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.Test;
+
+import basicSocial.utils.MongoUtils;
+
+import com.mongodb.client.MongoDatabase;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +15,21 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class SocialTest {
+	
+	private static final String dbName = "mongoTestBasicSocialDAOImpTest";
+	private static MongoDatabase db = MongoUtils.getMongoDB(dbName);
+	
+	@AfterClass
+	public static void closeDB(){
+		db.drop();
+		MongoUtils.closeMongo();
+	}
+		
+	@Before
+	public void dropDB(){
+		db.drop();
+		db = MongoUtils.getMongoDB(dbName);
+	}
 	
 	@Test
 	public void execRequestShouldAdd1MessageToTheMessageListIfTheUserPostOneMessage(){
@@ -57,8 +78,10 @@ public class SocialTest {
 	
 	@Test
 	public void execRequestShouldAddTheUserToTheFollowListIfTheCommandIsFollow(){
+		String charlie_post = "charlie -> first message from bob";
 		String cmd = "charlie follow bob";
 		Social test = new Social();
+		test.execRequest(charlie_post);
 		List<String> followers = test.execRequest(cmd);
 
 		assertEquals("Actual: "+followers, Arrays.asList("bob"),followers);

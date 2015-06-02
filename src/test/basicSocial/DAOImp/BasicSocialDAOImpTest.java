@@ -115,7 +115,7 @@ public class BasicSocialDAOImpTest{
 				
 		BasicSocialDAOImp daoImp = new BasicSocialDAOImp();
 		
-		assertEquals(msgList, daoImp.getAllPosts(alice));	
+		assertEquals(msgList, daoImp.getAllPosts(alice,true));	
 	}
 	
 	
@@ -134,9 +134,22 @@ public class BasicSocialDAOImpTest{
 		}
 		
 		BasicSocialDAOImp daoImp = new BasicSocialDAOImp();
-		List<Message> result = daoImp.getAllPosts(user);
-		System.out.println(result.size());
+		List<Message> result = daoImp.getAllPosts(user,false);
 		assertEquals(msgList, result);	
+	}
+	
+	@Test
+	public void updateUserShouldUpdateTheUserInformation(){
+		User user = new User();
+		user.setName("Charlie");
+		user.addFollower("Bob");
+		user.addFollower("Alice");
+		BasicSocialDAOImp daoImp = new BasicSocialDAOImp();
+		daoImp.createUser(user);
+		
+		user.addFollower("NewFollower");
+		assertEquals(user,daoImp.updateFollowerList(user));
+		
 	}
 	
 
