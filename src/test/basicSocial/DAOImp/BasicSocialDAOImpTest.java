@@ -80,5 +80,11 @@ public class BasicSocialDAOImpTest{
 		BasicSocialDAOImp daoImp = new BasicSocialDAOImp();
 		assertEquals(user,daoImp.getUser(user.getName()));
 	}
+	
+	@Test
+	public void getUserShouldReturnNullIfTheUserDoesNotExist(){
+		BasicSocialDAOImp daoImp = new BasicSocialDAOImp();
+		assertNull(daoImp.getUser("Alice"));
+	}
 
 }
