@@ -7,11 +7,12 @@ import org.joda.time.LocalDateTime;
  * Created by peppe on 28/05/15.
  */
 public class Message {
-
+	
+	private String sender;
     private String text;
     private LocalDateTime time;
 
-    public Message(String text) {
+    public Message(String sender,String text) {
         this.text = text;
         this.time = LocalDateTime.now();
     }

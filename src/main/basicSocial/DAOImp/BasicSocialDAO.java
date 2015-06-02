@@ -14,10 +14,10 @@ public interface BasicSocialDAO {
 
 	public void createUser(User user);
 	
-	public void savePost(User user, Message post );
+	public void savePost(Message post );
 	
-	public User getUser(String id);
+	public User getUser(String name);
 	
-	public List<Message> getPosts(String userName);
+	public List<Message> getAllPosts(String userName);
 	
 }
